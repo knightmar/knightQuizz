@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
 
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".GameActivity">
 
     <TextView
+        android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="@color/teal_700"
         android:gravity="center"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:background="@color/teal_700"
 
         android:text="Question 1 :"
 
@@ -31,12 +32,16 @@
 
 
         <Button
+            android:id="@+id/answer1Btn"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Answer 1" />
 
         <Button
+            android:id="@+id/answer2Btn"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -44,6 +49,8 @@
             android:text="Answer 1" />
 
         <Button
+            android:id="@+id/answer3Btn"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

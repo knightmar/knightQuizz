@@ -48,7 +48,16 @@ public enum Questions {
         return answer3;
     }
 
-    public int getCorrectAnswer() {
-        return correctAnswer;
+    public String getCorrectAnswer() {
+        switch (correctAnswer) {
+            case 1:
+                return this.answer1;
+            case 2:
+                return this.answer2;
+            case 3:
+                return this.answer3;
+            default:
+                return "Error";
+        }
     }
 }
