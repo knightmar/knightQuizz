@@ -1,9 +1,11 @@
 package fr.knightmar.knightquizz;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +18,9 @@ public class GameActivity extends AppCompatActivity {
     protected Button answer3Btn;
     Questions question;
     private Boolean isCorrect = null;
+    private int score;
+    private int nbQuestion = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,6 @@ public class GameActivity extends AppCompatActivity {
         answer2Btn = findViewById(R.id.answer2Btn);
         answer3Btn = findViewById(R.id.answer3Btn);
 
-        int nbQuestion = 0;
         question = showQuestion();
 
         answer1Btn.setOnClickListener(new View.OnClickListener() {
@@ -35,9 +39,19 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 isCorrect = testAnswer(answer1Btn);
                 if (isCorrect) {
-                    System.out.println("knightmarApp : correct answer");
+                    if (nbQuestion < 9) {
+                        question = showQuestion();
+                        nbQuestion = nbQuestion + 1;
+                        score = score + 10;
+                    } else System.exit(0);
+                    sendAToast(view.getContext(), "Bonne réponse, vous avez " + score + "points");
                 } else {
-                    System.out.println("knightmarApp : not correct answer");
+                    if (nbQuestion < 9) {
+                        question = showQuestion();
+                        nbQuestion = nbQuestion + 1;
+                        score = score - 10;
+                    } else System.exit(0);
+                    sendAToast(view.getContext(), "Dommage, vous avez " + score + "points");
                 }
             }
         });
@@ -47,21 +61,43 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 isCorrect = testAnswer(answer2Btn);
                 if (isCorrect) {
-                    System.out.println("knightmarApp : correct answer");
+                    if (nbQuestion < 9) {
+                        question = showQuestion();
+                        nbQuestion = nbQuestion + 1;
+                        score = score + 10;
+                    } else System.exit(0);
+                    sendAToast(view.getContext(), "Bonne réponse, vous avez " + score + "points");
                 } else {
-                    System.out.println("knightmarApp : not correct answer");
+                    if (nbQuestion < 9) {
+                        question = showQuestion();
+                        nbQuestion = nbQuestion + 1;
+                        score = score - 10;
+                    } else System.exit(0);
+                    sendAToast(view.getContext(), "Dommage, vous avez " + score + "points");
                 }
             }
+
         });
+
 
         answer3Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isCorrect = testAnswer(answer3Btn);
                 if (isCorrect) {
-                    System.out.println("knightmarApp : correct answer");
+                    if (nbQuestion < 9) {
+                        question = showQuestion();
+                        nbQuestion = nbQuestion + 1;
+                        score = score + 10;
+                    } else System.exit(0);
+                    sendAToast(view.getContext(), "Bonne réponse, vous avez " + score + "points");
                 } else {
-                    System.out.println("knightmarApp : not correct answer");
+                    if (nbQuestion < 9) {
+                        question = showQuestion();
+                        nbQuestion = nbQuestion + 1;
+                        score = score - 10;
+                    } else System.exit(0);
+                    sendAToast(view.getContext(), "Dommage, vous avez " + score + "points");
                 }
             }
         });
@@ -82,5 +118,9 @@ public class GameActivity extends AppCompatActivity {
             return answerButton.getText() == question.getCorrectAnswer();
         else
             return false;
+    }
+
+    private void sendAToast(Context context, String text) {
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 }
