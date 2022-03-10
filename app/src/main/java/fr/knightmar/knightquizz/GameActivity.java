@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import fr.knightmar.knightquizz.utils.Questions;
 
 public class GameActivity extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class GameActivity extends AppCompatActivity {
     private Boolean isCorrect = null;
     private int score;
     private int nbQuestion = 1;
+    private ArrayList<Integer> questionsToExcludes = new ArrayList<Integer>();
 
 
     @Override
@@ -105,7 +108,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private Questions showQuestion() {
-        Questions question = Questions.random();
+        boolean questionIsOk = false;
+        while (!questionIsOk){
+            question = Questions.random();
+            if (!isAlreadyChoose(question))
+                questionIsOk = true;
+        }
+        questionsToExcludes.add(question.getId());
         questionText.setText(question.getQuestion());
         answer1Btn.setText(question.getAnswer1());
         answer2Btn.setText(question.getAnswer2());
@@ -122,5 +131,16 @@ public class GameActivity extends AppCompatActivity {
 
     private void sendAToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+    }
+
+    private boolean isAlreadyChoose(Questions questionToCheck) {
+        System.out.println("is already choose fonction");
+        for (int i = 0; i < questionsToExcludes.size(); i++) {
+            if (questionToCheck.getId() == questionsToExcludes.get(i)) {
+                System.out.println("the question is already choose " +questionToCheck.getId());
+                return true;
+            }
+        }
+        return false;
     }
 }
